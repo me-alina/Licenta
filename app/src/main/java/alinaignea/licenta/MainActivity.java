@@ -16,15 +16,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
     private TextView txtName;
     private TextView txtEmail;
-    private Button btnLogout;
     private Button btnViewTrips;
     private Button btnSearchTrips;
     private Button btnAddTrip;
@@ -35,11 +34,11 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         txtName = (TextView) findViewById(R.id.name);
         txtEmail = (TextView) findViewById(R.id.email);
-        btnLogout = (Button) findViewById(R.id.btnLogout);
         btnViewTrips = (Button) findViewById(R.id.btnViewTrips);
         btnSearchTrips = (Button) findViewById(R.id.btnSearchTrips);
         btnAddTrip = (Button) findViewById(R.id.btnAddTrip);
@@ -64,14 +63,7 @@ public class MainActivity extends Activity {
         txtName.setText(name);
         txtEmail.setText(email);
 
-        // Logout button click event
-        btnLogout.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                logoutUser();
-            }
-        });
     }
 
 
@@ -79,7 +71,7 @@ public class MainActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.my_menu, my_menu);
+        inflater.inflate(R.menu.my_menu, menu);
 
         return true;
 
@@ -89,10 +81,11 @@ public class MainActivity extends Activity {
 
         switch (item.getItemId()) {
             case R.id.view:
-                startActivity(new Intent(this, ViewProfile.class));
+
+                startActivity(new Intent(MainActivity.this, ViewProfile.class));
                 return true;
             case R.id.edit:
-                startActivity(new Intent(this, EditProfile.class));
+                startActivity(new Intent(MainActivity.this, EditProfile.class));
                 return true;
             case R.id.logout:
                 logoutUser();
@@ -108,7 +101,7 @@ public class MainActivity extends Activity {
      * Logging out the user. Will set isLoggedIn flag to false in shared
      * preferences Clears the user data from sqlite users table
      * */
-    private void logoutUser() {
+    public void logoutUser() {
         session.setLogin(false);
 
         db.deleteUsers();

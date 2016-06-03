@@ -9,4 +9,7 @@ public class AppConfig {
 
     // Server user register url
     public static String URL_REGISTER = "http://10.0.2.2/licenta/register.php";
+
+    // Server user profile url
+    public static String URL_PROFILE = "http://10.0.2.2/licenta/profile.php";
 }

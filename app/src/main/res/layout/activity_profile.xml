@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/GridLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_login"
+    android:layout_gravity="fill"
+    android:columnCount="2"
+   >
+
+    <ImageView
+        android:id="@+id/pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/pic"
+        android:layout_column="0"
+        android:layout_gravity="left|top"
+        android:layout_rowSpan="4"
+        />
+
+    <TextView
+        android:id="@+id/txtname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/lbl_name"
+        android:padding="10dp"
+        android:textSize="24dp"
+
+        android:layout_column="1"
+        android:layout_gravity="left|top"
+        android:layout_row="0"
+        />
+
+    <TextView
+        android:id="@+id/txtcity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/lbl_name"
+        android:padding="10dp"
+        android:textSize="20dp"
+        android:text="@string/city_label"
+        android:layout_column="1"
+        android:layout_gravity="left|top"
+        android:layout_row="1"
+         />
+
+    <TextView
+        android:id="@+id/txtphone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/lbl_name"
+        android:padding="10dp"
+        android:textSize="20dp"
+
+        android:layout_column="1"
+        android:layout_gravity="left|top"
+        android:layout_row="2"
+    />
+    <TextView
+        android:id="@+id/txtemail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/lbl_name"
+        android:padding="10dp"
+        android:textSize="20dp"
+
+        android:layout_column="1"
+        android:layout_gravity="left|top"
+        android:layout_row="3"
+        />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:numStars="5"
+        android:stepSize="0.1"
+        android:rating="2.7"
+        android:layout_column="0"
+        android:layout_columnSpan="2"
+        />
+    <Space
+        android:layout_width="fill_parent"
+        android:layout_height="10dp"
+        android:layout_column="0"
+        android:layout_columnSpan="2"
+        />
+    <TextView
+        android:id="@+id/txtabout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/lbl_name"
+        android:padding="10dp"
+        android:textSize="24dp"
+        android:text="@string/about_label"
+        android:layout_column="0"
+        android:layout_gravity="left|top"
+        android:layout_row="6"
+        />
+
+    <Button
+        android:id="@+id/btnEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/btn_logut_bg"
+        android:text="@string/editProfile"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        />
+
+    <TextView
+        android:id="@+id/aboutInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/lbl_name"
+        android:padding="10dp"
+        android:textSize="16dp"
+        android:text="@string/aboutInfo_label"
+        android:layout_column="0"
+        android:layout_columnSpan="2"
+        android:layout_rowSpan="6"
+        android:layout_gravity="left|top"
+        android:layout_row="7"
+        />
+
+</GridLayout>

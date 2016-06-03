@@ -12,13 +12,21 @@
     <string name="btn_link_to_login">Already registred. Log me in!</string>
     <string name="welcome">Welcome</string>
     <string name="carShare">Car Share</string>
-    <string name="btn_logout">LOGOUT</string>
+    <string name="btn_logout">Logout</string>
     <string name="name">Fullname</string>
     <string name="btn_viewTrips">View trips</string>
     <string name="btn_addTrip">Add trip</string>
     <string name="btn_searchTrips">Search trips</string>
     <string name="viewProfile">View profile</string>
     <string name="editProfile">Edit profile</string>
+
+    <string name="name_label">Nume Prenume</string>
+    <string name="phone_label">0745234532</string>
+    <string name="email_label">a@gmail.com</string>
+    <string name="city_label">Timisoara</string>
+    <string name="rating_label">Rating: </string>
+    <string name="about_label">About me </string>
+    <string name="aboutInfo_label">Profesorul universitar de latină de la colegiul Hampden-Sydney din Virginia, Richard McClintock, a căutat în bibliografie unul din cele mai rar folosite cuvinte latine "consectetur", întâlnit în pasajul Lorem Ipsum, şi căutând citate ale cuvântului respectiv în literatura clasică, a descoperit la modul cel mai sigur sursa provenienţei textului. Lorem Ipsum provine din secţiunile 1.10.32 şi 1.10.33 din "de Finibus Bonorum et Malorum" (Extremele Binelui şi ale Răului) de Cicerone, scrisă în anul 45 î.e.n. Această carte este un tratat în teoria eticii care a fost foarte popular în perioada Renasterii.  </string>
 
 
 </resources>
