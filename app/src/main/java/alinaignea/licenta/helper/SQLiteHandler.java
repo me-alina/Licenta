@@ -68,7 +68,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, name); // Name
         values.put(KEY_EMAIL, email); // Email
-        values.put(KEY_UID, uid); // Email
+        values.put(KEY_UID, uid); // uid
         values.put(KEY_CREATED_AT, created_at); // Created At
 
         // Inserting Row
@@ -113,6 +113,16 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         db.close();
 
         Log.d(TAG, "Deleted all user info from sqlite");
+    }
+    public long updateContact(String rowId, String name, String email) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues args = new ContentValues();
+        args.put(KEY_NAME, name);
+        args.put(KEY_EMAIL, email);
+        Log.d("database", KEY_UID + "=" + rowId);
+        long id = db.update(TABLE_USER, args, KEY_UID + "=" + rowId, null);
+        db.close();
+        return id;
     }
 
 }

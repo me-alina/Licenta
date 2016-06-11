@@ -6,6 +6,8 @@
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="hint_name">Full Name</string>
+    <string name="hint_phone">Phone</string>
+    <string name="hint_about">About</string>
     <string name="btn_login">LOGIN</string>
     <string name="btn_register">REGISTER</string>
     <string name="btn_link_to_register">Not a member? Sign up now.</string>
@@ -17,8 +19,11 @@
     <string name="btn_viewTrips">View trips</string>
     <string name="btn_addTrip">Add trip</string>
     <string name="btn_searchTrips">Search trips</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_save">Save changes</string>
     <string name="viewProfile">View profile</string>
     <string name="editProfile">Edit profile</string>
+
 
     <string name="name_label">Nume Prenume</string>
     <string name="phone_label">0745234532</string>
@@ -28,5 +33,15 @@
     <string name="about_label">About me </string>
     <string name="aboutInfo_label">Profesorul universitar de latină de la colegiul Hampden-Sydney din Virginia, Richard McClintock, a căutat în bibliografie unul din cele mai rar folosite cuvinte latine "consectetur", întâlnit în pasajul Lorem Ipsum, şi căutând citate ale cuvântului respectiv în literatura clasică, a descoperit la modul cel mai sigur sursa provenienţei textului. Lorem Ipsum provine din secţiunile 1.10.32 şi 1.10.33 din "de Finibus Bonorum et Malorum" (Extremele Binelui şi ale Răului) de Cicerone, scrisă în anul 45 î.e.n. Această carte este un tratat în teoria eticii care a fost foarte popular în perioada Renasterii.  </string>
 
+
+    <string name="radio1">10 min </string>
+    <string name="radio2">30 min </string>
+    <string name="radio3">1 h </string>
+    <string name="radio4">hh mm </string>
+    <string name="txtleaving">Leaving in: </string>
+    <string name="txtfrom">From: </string>
+    <string name="txtto">To: </string>
+    <string name="txtfree">Free seats: </string>
+    <string name="btn_add">Add trip! </string>
 
 </resources>

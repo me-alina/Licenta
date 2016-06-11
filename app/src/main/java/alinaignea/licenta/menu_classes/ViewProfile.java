@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -84,6 +85,16 @@ public class ViewProfile extends Activity {
         ratingVal = (RatingBar) findViewById(R.id.ratingBar);
         picture = (ImageView) findViewById(R.id.pic);
 
+
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),
+                        EditProfile.class);
+                startActivity(i);
+                finish();
+            }
+        });
         // SQLite database handler
         db = new SQLiteHandler(getApplicationContext());
 

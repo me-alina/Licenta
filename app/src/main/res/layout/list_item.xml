@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/GridLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_login"
+    android:layout_gravity="fill"
+    android:columnCount="2"
+    >
+
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="2dip"
+        android:paddingTop="6dip"
+        android:textStyle="bold"
+        android:textSize="24dp"
+        android:text="Ion Omat"
+        android:layout_columnWeight="1"
+        android:layout_column="0"
+        android:layout_row="0"
+        android:textColor="@color/lbl_name"
+        />
+
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="2dip"
+        android:paddingTop="6dip"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:text="10 min"
+        android:layout_column="0"
+        android:layout_row="1"
+        android:layout_columnWeight="1"
+        android:textColor="@color/lbl_name"
+        />
+
+    <TextView
+        android:id="@+id/seats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:textSize="20dp"
+        android:text="4 seats"
+        android:layout_column="1"
+        android:layout_row="1"
+        android:layout_columnWeight="1"
+        android:textColor="@color/lbl_name"
+        />
+
+
+
+    <TextView
+        android:id="@+id/orig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="2dip"
+        android:textSize="20dp"
+        android:text="Silistra"
+        android:layout_column="0"
+        android:layout_row="2"
+        android:layout_columnWeight="1"
+        android:textColor="@color/lbl_name"
+        />
+
+
+    <TextView
+        android:id="@+id/dest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+
+        android:textSize="20dp"
+        android:layout_column="1"
+        android:layout_row="2"
+        android:text="Judetean"
+        android:textColor="@color/lbl_name"
+        android:layout_columnWeight="1"
+        />
+
+
+
+
+
+</GridLayout>

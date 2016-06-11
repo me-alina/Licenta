@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg_register"
+    android:gravity="top"
+    android:padding="10dp"
+    >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:contentDescription="@string/carShare"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/leaving"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/lbl_name"
+        android:textSize="20dp"
+        android:padding="5dp"
+        android:text="@string/txtleaving"
+        android:layout_gravity="left|top"
+        />
+    <RadioGroup android:id="@+id/departure"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/btn_login_bg"
+        android:orientation="horizontal">
+
+    <RadioButton
+        android:id="@+id/radioButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:buttonTint="@color/btn_login_bg"
+        android:text="@string/radio1"
+        android:textColor="@color/btn_login_bg"
+
+        />/>
+
+    <RadioButton
+        android:id="@+id/radioButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:buttonTint="@color/btn_login_bg"
+        android:text="@string/radio2"
+        android:textColor="@color/btn_login_bg"
+
+
+        />/>
+
+    <RadioButton
+        android:id="@+id/radioButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:buttonTint="@color/btn_login_bg"
+        android:text="@string/radio3"
+        android:textColor="@color/btn_login_bg"
+
+
+        />/>
+
+    <RadioButton
+        android:id="@+id/radioButton4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/btn_login_bg"
+
+        />/>
+
+        <EditText
+            android:id="@+id/departure_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/radio4"
+            android:textColorHint="@color/btn_login_bg"
+            android:textColor="@color/input_login"
+            android:inputType="time"
+            />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/lbl_name"
+        android:textSize="20dp"
+        android:padding="5dp"
+        android:text="@string/txtfrom"
+        android:layout_gravity="left|top"
+        />
+
+    <EditText
+        android:id="@+id/edit_from"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/input_register_bg"
+        android:inputType="textEmailAddress"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:textColor="@color/input_register"
+        android:textColorHint="@color/input_register_hint" />
+
+    <TextView
+        android:id="@+id/to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/lbl_name"
+        android:textSize="20dp"
+        android:padding="5dp"
+        android:text="@string/txtto"
+        android:layout_gravity="left|top"
+        />
+
+    <EditText
+        android:id="@+id/edit_to"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/input_register_bg"
+        android:inputType="textEmailAddress"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:textColor="@color/input_register"
+        android:textColorHint="@color/input_register_hint" />
+
+    <TextView
+        android:id="@+id/free"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/lbl_name"
+        android:textSize="20dp"
+        android:padding="5dp"
+        android:text="@string/txtfree"
+        android:layout_gravity="left|top"
+        />
+    <RadioGroup android:id="@+id/free_seats"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <RadioButton
+        android:id="@+id/radioButton5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:buttonTint="@color/btn_login_bg"
+        android:text="1"
+        android:textColor="@color/btn_login_bg"
+        />/>
+
+    <RadioButton
+        android:id="@+id/radioButton6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:buttonTint="@color/btn_login_bg"
+        android:text="2"
+        android:textColor="@color/btn_login_bg"
+
+        />/>
+
+    <RadioButton
+        android:id="@+id/radioButton7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:buttonTint="@color/btn_login_bg"
+        android:text="3"
+        android:textColor="@color/btn_login_bg"
+
+        />/>
+
+    <RadioButton
+        android:id="@+id/radioButton8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/btn_login_bg"
+        android:text="4"
+        android:textColor="@color/btn_login_bg"
+        />/>
+
+    </RadioGroup>
+
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:background="@color/btn_register_bg"
+        android:text="@string/btn_add"
+        android:textColor="@color/white" />
+
+
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="@string/btn_cancel"
+        android:textAllCaps="false"
+        android:textColor="@color/dark_text"
+        android:textSize="15dp" />
+
+
+</LinearLayout>
