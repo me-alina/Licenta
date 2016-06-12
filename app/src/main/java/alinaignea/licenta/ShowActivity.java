@@ -117,7 +117,7 @@ public class ShowActivity extends Activity {
 
                 HashMap<String,String> trips = new HashMap<String,String>();
                 trips.put(TAG_NAME,name);
-                trips.put(TAG_TIME,"Leaving in "+time);
+                trips.put(TAG_TIME,"Leaving at "+time);
                 trips.put(TAG_ORIG,"From "+orig);
                 trips.put(TAG_DEST,"To "+dest);
                 trips.put(TAG_SEATS,seats+" free seats");

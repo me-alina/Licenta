@@ -99,8 +99,9 @@ public class AddActivity extends Activity {
                     RadioButton radioButton1 = (RadioButton) findViewById(selectedId1);
                     if(!radioButton1.equals(inserted_time))
                         depart = radioButton1.getText().toString();
-                    else
+                    else {
                         depart = departure_time.getText().toString();
+                    }
                 }
 
                 if (free_seats.getCheckedRadioButtonId() == -1)
@@ -123,7 +124,10 @@ public class AddActivity extends Activity {
 
 
                 if (!depart.isEmpty() && !seats.isEmpty() && !origin.isEmpty()&& !destination.isEmpty())
-                     addTrip(uid, depart, seats, origin, destination);
+                    if (!depart.matches("([01][0-9]|2[0-3]):[0-5][0-9]"))
+                        Toast.makeText(getApplicationContext(), "Please insert a valid time in the format hh:mm!", Toast.LENGTH_LONG).show();
+                    else
+                        addTrip(uid, depart, seats, origin, destination);
                 //Toast.makeText(getApplicationContext(),
                       //  "Details complete!", Toast.LENGTH_LONG).show();
 

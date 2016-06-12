@@ -14,6 +14,12 @@
         android:contentDescription="@string/carShare"
         android:src="@drawable/logo" />
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        >
     <TextView
         android:id="@+id/leaving"
         android:layout_width="wrap_content"
@@ -22,8 +28,24 @@
         android:textSize="20dp"
         android:padding="5dp"
         android:text="@string/txtleaving"
+        android:layout_weight="1"
         android:layout_gravity="left|top"
         />
+
+        <TextView
+            android:id="@+id/leavingat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/lbl_name"
+            android:textSize="20dp"
+            android:padding="5dp"
+            android:paddingEnd="43sp"
+            android:paddingRight="43sp"
+            android:text="@string/txtleavingat"
+            android:layout_gravity="right|top"
+            />
+
+        </LinearLayout>
     <RadioGroup android:id="@+id/departure"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

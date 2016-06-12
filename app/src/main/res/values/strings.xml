@@ -37,11 +37,13 @@
     <string name="radio1">10 min </string>
     <string name="radio2">30 min </string>
     <string name="radio3">1 h </string>
-    <string name="radio4">hh mm </string>
+    <string name="radio4">hh:mm </string>
     <string name="txtleaving">Leaving in: </string>
+    <string name="txtleavingat">or at: </string>
     <string name="txtfrom">From: </string>
     <string name="txtto">To: </string>
     <string name="txtfree">Free seats: </string>
     <string name="btn_add">Add trip! </string>
+    <string name="btn_join">Join! </string>
 
 </resources>
