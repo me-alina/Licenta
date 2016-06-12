@@ -27,6 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/welcome"
+            android:textColor="@color/btn_login_bg"
             android:textSize="20dp" />
 
         <TextView
@@ -41,6 +42,7 @@
             android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/lbl_name"
             android:textSize="13dp" />
 
         <Space

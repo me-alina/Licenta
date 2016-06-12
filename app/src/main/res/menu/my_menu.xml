@@ -17,7 +17,12 @@
         android:orderInCategory="100"
         app:showAsAction="ifRoom|withText"
         />
-
+    <item
+        android:id="@+id/main"
+        android:title="@string/btn_main"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom|withText"
+        />
     <item
         android:id="@+id/logout"
         android:title="@string/btn_logout"

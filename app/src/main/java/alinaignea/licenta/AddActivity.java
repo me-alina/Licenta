@@ -50,7 +50,7 @@ public class AddActivity extends Activity {
     String depart, seats, origin, destination;
     private SQLiteHandler db;
     private String uid;
-
+    private RadioButton radioButton1;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +96,7 @@ public class AddActivity extends Activity {
                     // get selected radio button from radioGroup
                     int selectedId1 = departure.getCheckedRadioButtonId();
                     // find the radio button by returned id
-                    RadioButton radioButton1 = (RadioButton) findViewById(selectedId1);
+                    radioButton1 = (RadioButton) findViewById(selectedId1);
                     if(!radioButton1.equals(inserted_time))
                         depart = radioButton1.getText().toString();
                     else {
@@ -124,7 +124,7 @@ public class AddActivity extends Activity {
 
 
                 if (!depart.isEmpty() && !seats.isEmpty() && !origin.isEmpty()&& !destination.isEmpty())
-                    if (!depart.matches("([01][0-9]|2[0-3]):[0-5][0-9]"))
+                    if (radioButton1.equals(inserted_time)&&!depart.matches("([01][0-9]|2[0-3]):[0-5][0-9]"))
                         Toast.makeText(getApplicationContext(), "Please insert a valid time in the format hh:mm!", Toast.LENGTH_LONG).show();
                     else
                         addTrip(uid, depart, seats, origin, destination);
@@ -154,10 +154,9 @@ public class AddActivity extends Activity {
                 startActivity(new Intent(this, ViewProfile.class));
                 return true;
             case R.id.edit:
-                startActivity(new Intent(this, EditProfile.class));
                 return true;
-            case R.id.logout:
-                // to make public static method from logout method in class MainActivity!!!
+            case R.id.main:
+                startActivity(new Intent(this, MainActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

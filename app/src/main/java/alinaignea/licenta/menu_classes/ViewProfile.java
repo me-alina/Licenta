@@ -127,22 +127,18 @@ public class ViewProfile extends Activity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.view:
-
                 startActivity(new Intent(this, ViewProfile.class));
                 return true;
             case R.id.edit:
-                startActivity(new Intent(this, EditProfile.class));
                 return true;
-            case R.id.logout:
-
+            case R.id.main:
+                startActivity(new Intent(this, MainActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 
 

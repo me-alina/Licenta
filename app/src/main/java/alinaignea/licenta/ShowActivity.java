@@ -1,12 +1,17 @@
 package alinaignea.licenta;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -23,6 +28,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import alinaignea.licenta.menu_classes.ViewProfile;
+
 /**
  * Created by Alina Ignea on 6/11/2016.
  */
@@ -30,12 +37,12 @@ public class ShowActivity extends Activity {
 
     String myJSON;
 
-    private static final String TAG_RESULTS="response";
-    private static final String TAG_NAME = "name";
-    private static final String TAG_TIME = "depart";
-    private static final String TAG_ORIG = "origin";
-    private static final String TAG_DEST = "destination";
-    private static final String TAG_SEATS = "seats";
+    protected static final String TAG_RESULTS="response";
+    protected static final String TAG_NAME = "name";
+    protected static final String TAG_TIME = "depart";
+    protected static final String TAG_ORIG = "origin";
+    protected static final String TAG_DEST = "destination";
+    protected static final String TAG_SEATS = "seats";
 
     JSONArray peoples = null;
 
@@ -51,6 +58,29 @@ public class ShowActivity extends Activity {
         getData();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.my_menu, menu);
+
+        return true;
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.view:
+                startActivity(new Intent(this, ViewProfile.class));
+                return true;
+            case R.id.edit:
+                return true;
+            case R.id.main:
+                startActivity(new Intent(this, MainActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     public void getData(){
         class GetDataJSON extends AsyncTask<String, Void, String> {
@@ -131,7 +161,16 @@ public class ShowActivity extends Activity {
                     new int[]{R.id.username, R.id.time, R.id.orig, R.id.dest, R.id.seats}
             );
 
-            list.setAdapter(adapter);
+            if (!tripsList.isEmpty())
+                list.setAdapter(adapter);
+            else
+            {
+                Toast.makeText(getApplicationContext(), "Unfortunately there are no trips to show" , Toast.LENGTH_LONG).show();
+                Intent i = new Intent(getApplicationContext(),
+                        MainActivity.class);
+                startActivity(i);
+                finish();
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();

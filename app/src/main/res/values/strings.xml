@@ -9,6 +9,7 @@
     <string name="hint_phone">Phone</string>
     <string name="hint_about">About</string>
     <string name="btn_login">LOGIN</string>
+    <string name="btn_main">Main page</string>
     <string name="btn_register">REGISTER</string>
     <string name="btn_link_to_register">Not a member? Sign up now.</string>
     <string name="btn_link_to_login">Already registred. Log me in!</string>
@@ -45,5 +46,8 @@
     <string name="txtfree">Free seats: </string>
     <string name="btn_add">Add trip! </string>
     <string name="btn_join">Join! </string>
+
+    <string name="txtleavingafter">Leaving later than: </string>
+    <string name="txtneeded">Seats needed: </string>
 
 </resources>

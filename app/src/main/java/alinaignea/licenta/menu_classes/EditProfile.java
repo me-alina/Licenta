@@ -163,8 +163,8 @@ public class EditProfile extends Activity {
                 return true;
             case R.id.edit:
                 return true;
-            case R.id.logout:
-                      // to make public static method from logout methid in class MainActivity
+            case R.id.main:
+                startActivity(new Intent(this, MainActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
