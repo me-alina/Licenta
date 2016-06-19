@@ -38,11 +38,15 @@ public class ShowActivity extends Activity {
     String myJSON;
 
     protected static final String TAG_RESULTS="response";
+    protected static final String TAG_UID = "uid";
     protected static final String TAG_NAME = "name";
     protected static final String TAG_TIME = "depart";
     protected static final String TAG_ORIG = "origin";
     protected static final String TAG_DEST = "destination";
     protected static final String TAG_SEATS = "seats";
+    protected static final String TAG_DATE = "date";
+
+
 
     JSONArray peoples = null;
 
@@ -137,17 +141,21 @@ public class ShowActivity extends Activity {
 
             for(int i=0;i<peoples.length();i++){
                 JSONObject c = peoples.getJSONObject(i);
+                String uid = c.getString(TAG_UID);
                 String name = c.getString(TAG_NAME);
                 String time = c.getString(TAG_TIME);
+                String date = c.getString(TAG_DATE);
                 String orig = c.getString(TAG_ORIG);
                 String dest = c.getString(TAG_DEST);
                 String seats = c.getString(TAG_SEATS);
-
-
+                String day=date.substring(date.length() - 2);
+                String month = date.substring(5, 7);
+                date = day + "/"+month;
 
                 HashMap<String,String> trips = new HashMap<String,String>();
                 trips.put(TAG_NAME,name);
-                trips.put(TAG_TIME,"Leaving at "+time);
+                trips.put(TAG_UID,uid);
+                trips.put(TAG_TIME, "In " + date + ", at "+time);
                 trips.put(TAG_ORIG,"From "+orig);
                 trips.put(TAG_DEST,"To "+dest);
                 trips.put(TAG_SEATS,seats+" free seats");

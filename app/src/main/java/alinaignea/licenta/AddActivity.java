@@ -47,10 +47,12 @@ public class AddActivity extends Activity {
     private RadioGroup departure, free_seats;
     private RadioButton inserted_time;
     private EditText departure_time, edit_from, edit_to;
-    String depart, seats, origin, destination;
+    String depart, seats, origin, destination, date;
     private SQLiteHandler db;
     private String uid;
     private RadioButton radioButton1;
+    private MyEditTextDatePicker datePicker;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +69,8 @@ public class AddActivity extends Activity {
         edit_from = (EditText) findViewById(R.id.edit_from);
         edit_to = (EditText) findViewById(R.id.edit_to);
 
+
+        datePicker = new MyEditTextDatePicker(this, R.id.edit_date);
 
         // SQLite database handler
         db = new SQLiteHandler(getApplicationContext());
@@ -121,7 +125,7 @@ public class AddActivity extends Activity {
 
                 origin = edit_from.getText().toString();
                 destination = edit_to.getText().toString();
-
+                date=datePicker._editText.getText().toString();
 
                 if (!depart.isEmpty() && !seats.isEmpty() && !origin.isEmpty()&& !destination.isEmpty())
                     if (radioButton1.equals(inserted_time)&&!depart.matches("([01][0-9]|2[0-3]):[0-5][0-9]"))
@@ -184,6 +188,7 @@ public class AddActivity extends Activity {
                     nameValuePairs.add(new BasicNameValuePair("fromplace", origin));
                     nameValuePairs.add(new BasicNameValuePair("toplace", destination));
                     nameValuePairs.add(new BasicNameValuePair("seats", seats));
+                    nameValuePairs.add(new BasicNameValuePair("date", date));
 
                     httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 

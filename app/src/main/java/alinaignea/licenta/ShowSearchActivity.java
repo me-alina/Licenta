@@ -19,7 +19,7 @@ import java.util.HashMap;
  */
 public class ShowSearchActivity extends ShowActivity {
 
-    String depart, needed_seats, origin, destination;
+    String depart, needed_seats, origin, destination, needed_date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class ShowSearchActivity extends ShowActivity {
         needed_seats = b.getString("seats");
         origin = b.getString("origin");
         destination = b.getString("destination");
-
+        needed_date = b.getString("date");
     }
 
     @Override
@@ -42,7 +42,9 @@ public class ShowSearchActivity extends ShowActivity {
             for(int i=0;i<peoples.length();i++){
                 JSONObject c = peoples.getJSONObject(i);
                 String name = c.getString(TAG_NAME);
+                String uid = c.getString(TAG_UID);
                 String time = c.getString(TAG_TIME);
+                String date = c.getString(TAG_DATE);
                 String orig = c.getString(TAG_ORIG);
                 String dest = c.getString(TAG_DEST);
                 String seats = c.getString(TAG_SEATS);
@@ -65,6 +67,17 @@ public class ShowSearchActivity extends ShowActivity {
                     System.out.println("Could not parse " + nfe);
                 }
                 // should use some more complex search algorithm based on Google Maps
+
+                if (needed_date != null && !needed_date.isEmpty() && !needed_date.equals("null"))
+                    try {
+                        Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(needed_date);
+                        Date date2 = new SimpleDateFormat("HH:mm").parse(date);
+                        if (!date1.equals(date2))
+                            continue;
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
                 if(!origin.toLowerCase().trim().equals(orig.toLowerCase().trim()) )
                     continue;
 
@@ -74,7 +87,8 @@ public class ShowSearchActivity extends ShowActivity {
 
                 HashMap<String,String> trips = new HashMap<String,String>();
                 trips.put(TAG_NAME,name);
-                trips.put(TAG_TIME,"Leaving at "+time);
+                trips.put(TAG_UID,uid);
+                trips.put(TAG_TIME, "In " + date + ", at "+time);
                 trips.put(TAG_ORIG,"From "+orig);
                 trips.put(TAG_DEST,"To "+dest);
                 trips.put(TAG_SEATS,seats+" free seats");

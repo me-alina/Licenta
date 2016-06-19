@@ -26,8 +26,8 @@ public class SearchActivity extends Activity {
     private Button btnCancel, btnSearch;
     private RadioGroup free_seats;
     private EditText departure_time, edit_from, edit_to;
-    String depart, seats, origin, destination;
-
+    String depart, seats, origin, destination, date;
+    private MyEditTextDatePicker datePicker;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +41,7 @@ public class SearchActivity extends Activity {
         departure_time = (EditText) findViewById(R.id.departure_time);
         edit_from = (EditText) findViewById(R.id.edit_from);
         edit_to = (EditText) findViewById(R.id.edit_to);
+        datePicker = new MyEditTextDatePicker(this, R.id.edit_date);
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -72,6 +73,7 @@ public class SearchActivity extends Activity {
 
                 origin = edit_from.getText().toString();
                 destination = edit_to.getText().toString();
+                date=datePicker._editText.getText().toString();
                 if(!depart.isEmpty())
                     if (!depart.matches("([01][0-9]|2[0-3]):[0-5][0-9]"))
                         Toast.makeText(getApplicationContext(), "Please insert a valid time in the format hh:mm!", Toast.LENGTH_LONG).show();
@@ -83,6 +85,9 @@ public class SearchActivity extends Activity {
                     i.putExtra("seats", seats);
                     i.putExtra("origin", origin);
                     i.putExtra("destination", destination);
+                    if(!date.isEmpty())
+                        if (date.matches("\\d{4}-\\d{2}-\\d{2}"))
+                            i.putExtra("date", date);
 
                     startActivity(i);
                     finish();

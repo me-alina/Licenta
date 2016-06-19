@@ -41,6 +41,7 @@
     <string name="radio4">hh:mm </string>
     <string name="txtleaving">Leaving in: </string>
     <string name="txtleavingat">or at: </string>
+    <string name="date">Date: </string>
     <string name="txtfrom">From: </string>
     <string name="txtto">To: </string>
     <string name="txtfree">Free seats: </string>
