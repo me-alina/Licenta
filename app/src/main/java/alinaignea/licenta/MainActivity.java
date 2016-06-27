@@ -5,8 +5,12 @@ package alinaignea.licenta;
  */
 import alinaignea.licenta.helper.SQLiteHandler;
 import alinaignea.licenta.helper.SessionManager;
-import alinaignea.licenta.menu_classes.EditProfile;
-import alinaignea.licenta.menu_classes.ViewProfile;
+import alinaignea.licenta.login_register.LoginActivity;
+import alinaignea.licenta.menu_profile.EditProfileActivity;
+import alinaignea.licenta.menu_profile.ViewProfileActivity;
+import alinaignea.licenta.trips.AddActivity;
+import alinaignea.licenta.trips.SearchActivity;
+import alinaignea.licenta.trips.ShowActivity;
 
 import java.util.HashMap;
 
@@ -19,7 +23,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -105,9 +108,7 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.my_menu, menu);
-
         return true;
-
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -115,10 +116,10 @@ public class MainActivity extends Activity {
         switch (item.getItemId()) {
             case R.id.view:
 
-                startActivity(new Intent(MainActivity.this, ViewProfile.class));
+                startActivity(new Intent(MainActivity.this, ViewProfileActivity.class));
                 return true;
             case R.id.edit:
-                startActivity(new Intent(MainActivity.this, EditProfile.class));
+                startActivity(new Intent(MainActivity.this, EditProfileActivity.class));
                 return true;
             case R.id.logout:
                 logoutUser();

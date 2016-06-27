@@ -1,4 +1,4 @@
-package alinaignea.licenta;
+package alinaignea.licenta.login_register;
 
 /**
  * Created by Alina Ignea on 5/15/2016.
@@ -24,8 +24,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import alinaignea.licenta.AppConfig;
-import alinaignea.licenta.AppController;
+import alinaignea.licenta.MainActivity;
+import alinaignea.licenta.R;
+import alinaignea.licenta.helper.AppConfig;
+import alinaignea.licenta.helper.AppController;
 import alinaignea.licenta.helper.SQLiteHandler;
 import alinaignea.licenta.helper.SessionManager;
 

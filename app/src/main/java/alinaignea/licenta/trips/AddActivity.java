@@ -1,4 +1,4 @@
-package alinaignea.licenta;
+package alinaignea.licenta.trips;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -33,10 +33,12 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import alinaignea.licenta.MainActivity;
+import alinaignea.licenta.R;
+import alinaignea.licenta.helper.AppConfig;
 import alinaignea.licenta.helper.SQLiteHandler;
-import alinaignea.licenta.helper.SessionManager;
-import alinaignea.licenta.menu_classes.EditProfile;
-import alinaignea.licenta.menu_classes.ViewProfile;
+import alinaignea.licenta.menu_profile.EditProfileActivity;
+import alinaignea.licenta.menu_profile.ViewProfileActivity;
 
 /**
  * Created by Alina Ignea on 6/9/2016.
@@ -155,9 +157,10 @@ public class AddActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.view:
-                startActivity(new Intent(this, ViewProfile.class));
+                startActivity(new Intent(this, ViewProfileActivity.class));
                 return true;
             case R.id.edit:
+                startActivity(new Intent(this, EditProfileActivity.class));
                 return true;
             case R.id.main:
                 startActivity(new Intent(this, MainActivity.class));

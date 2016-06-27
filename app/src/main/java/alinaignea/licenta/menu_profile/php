@@ -1,0 +1,119 @@
+<?php
+ //DB_config - Definirea variabilelor de configurare
+define("DB_HOST", "127.0.0.1");
+define("DB_USER", "root");
+define("DB_PASSWORD", "root");
+define("DB_DATABASE", "carsharing");
+?>
+
+<?php
+  class DB_Connect {
+      private $conn;
+      // functia de conectare la baza de date
+      public function connect() {
+          require_once 'include/Config.php';
+          // Realizarea legăturii cu baza de date
+          $this->conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+          // returnarea referintei la baza de date
+          return $this->conn;
+      }
+  }
+  ?>
+
+
+ //criptarea parolei - reutrneaza salt + parola criptata
+      public function hashSSHA($password) {
+          $salt = sha1(rand());
+          $salt = substr($salt, 0, 10);
+          $encrypted = base64_encode(sha1($password . $salt, true) . $salt);
+          $hash = array("salt" => $salt, "encrypted" => $encrypted);
+          return $hash;
+      }
+
+ //decriptarea parolei
+      public function checkhashSSHA($salt, $password) {
+          $hash = base64_encode(sha1($password . $salt, true) . $salt);
+          return $hash;
+      }
+
+     public function getUserByEmailAndPassword($email, $password) {
+             $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = ?");
+             $stmt->bind_param("s", $email);
+             if ($stmt->execute()) {
+                 $user = $stmt->get_result()->fetch_assoc();
+                 $stmt->close();
+                 // verificarea parolei
+                 $salt = $user['salt'];
+                 $encrypted_password = $user['encrypted_password'];
+                 $hash = $this->checkhashSSHA($salt, $password);
+                 // verifica daca parolele coincid
+                 if ($encrypted_password == $hash) {
+                     // daca datele sunt corecte returneaza utilizatorul
+                     return $user;
+                 }
+             }
+             else {return NULL;}
+         }
+
+         public function addCar ($driver_uid, $passenger_uid, $trip_uid){
+         	  // vezi daca exista solicitari pentru ruta respectiva deja
+         	  $rows = -1;
+         	  $stm = $this->conn->prepare("SELECT * FROM masina WHERE ruta_id = ?");
+               $stm->bind_param("d", $trip_uid);
+                 if ($stm->execute()) {
+                     $trip = $stm->get_result()->fetch_assoc();
+                     $stm->close();
+         		}
+         		if ($trip==false){
+         			echo "sunt primul pasager";
+         			$stmt = $this->conn->prepare("INSERT INTO masina (owner_id, pass_id1, ruta_id, updated_at) VALUES(?, ?, ?, NOW()");
+         			$stmt->bind_param('ssd', $driver_uid, $passenger_uid, $trip_uid);
+         			$result = $stmt->execute();
+         			$rows = $stmt->affected_rows;
+         			// should decrease free seats in trip
+         			$stmt->close();
+         		}
+         		else
+         		{
+
+         			if (is_null($trip['pass_id4']) && is_null($trip['pass_id3']) && is_null($trip['pass_id2'])) {
+         				echo "e un pasager";
+         				$stmt = $this->conn->prepare("UPDATE masina SET pass_id2 = '$passenger_uid', updated_at= NOW() where ruta_id='$trip_uid' ");
+         				$result = $stmt->execute();
+         				$rows = $stmt->affected_rows;
+         				$stmt->close();
+         			}
+         				else if (is_null($trip['pass_id4'])&& is_null($trip['pass_id3'])) {
+         					echo "sunt 2 pasageri";
+         					$stmt = $this->conn->prepare("UPDATE masina SET pass_id3 = '$passenger_uid', updated_at= NOW() where ruta_id='$trip_uid' ");
+         					$result = $stmt->execute();
+         					$rows = $stmt->affected_rows;
+         					$stmt->close();
+         				}
+         			else if (is_null($trip['pass_id4'])) {
+         				echo "sunt 3 pasageri";
+         				$stmt = $this->conn->prepare("UPDATE masina SET pass_id4 = '$passenger_uid', updated_at= NOW() where ruta_id='$trip_uid' ");
+         				$result = $stmt->execute();
+         				$rows = $stmt->affected_rows;
+         				$stmt->close();
+         			}
+         			else
+         			{$response["error"] = TRUE;
+         			$response["message"] = "Car is already full";
+         			return $response;
+         			}
+
+               //  $stmt->bind_param("sssss", $uuid, $name, $email, $encrypted_password, $salt);
+         		}
+             if($rows>=0){
+                  $response["error"] = FALSE;
+                  $response["message"] = "Added Sucessfully.";
+              }
+             else{
+                 $response["error"] = TRUE;
+                 $response["message"] = "Failed To Add.";
+              }
+
+                 return $response;
+
+          }

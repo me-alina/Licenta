@@ -1,4 +1,4 @@
-package alinaignea.licenta; /**
+package alinaignea.licenta.helper; /**
  * Created by Alina Ignea on 5/15/2016.
  */
 import android.app.Application;

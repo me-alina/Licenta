@@ -1,4 +1,4 @@
-package alinaignea.licenta;
+package alinaignea.licenta.trips;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+
+import alinaignea.licenta.MainActivity;
+import alinaignea.licenta.R;
 
 /**
  * Created by Alina Ignea on 6/12/2016.
@@ -37,10 +40,10 @@ public class ShowSearchActivity extends ShowActivity {
     protected void showList(){
         try {
             JSONObject jsonObj = new JSONObject(myJSON);
-            peoples = jsonObj.getJSONArray(TAG_RESULTS);
+            people = jsonObj.getJSONArray(TAG_RESULTS);
 
-            for(int i=0;i<peoples.length();i++){
-                JSONObject c = peoples.getJSONObject(i);
+            for(int i = 0; i< people.length(); i++){
+                JSONObject c = people.getJSONObject(i);
                 String name = c.getString(TAG_NAME);
                 String uid = c.getString(TAG_UID);
                 String time = c.getString(TAG_TIME);

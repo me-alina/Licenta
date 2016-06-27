@@ -1,4 +1,4 @@
-package alinaignea.licenta;
+package alinaignea.licenta.trips;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,10 +13,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import java.util.HashMap;
-
-import alinaignea.licenta.helper.SQLiteHandler;
-import alinaignea.licenta.menu_classes.ViewProfile;
+import alinaignea.licenta.MainActivity;
+import alinaignea.licenta.R;
+import alinaignea.licenta.menu_profile.EditProfileActivity;
+import alinaignea.licenta.menu_profile.ViewProfileActivity;
 
 /**
  * Created by Alina Ignea on 6/12/2016.
@@ -116,9 +116,10 @@ public class SearchActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.view:
-                startActivity(new Intent(this, ViewProfile.class));
+                startActivity(new Intent(this, ViewProfileActivity.class));
                 return true;
             case R.id.edit:
+                startActivity(new Intent(this, EditProfileActivity.class));
                 return true;
             case R.id.main:
                 startActivity(new Intent(this, MainActivity.class));

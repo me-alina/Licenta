@@ -1,7 +1,9 @@
-package alinaignea.licenta.menu_classes;
+package alinaignea.licenta.menu_profile;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,7 +22,6 @@ import android.widget.Toast;
 import android.os.AsyncTask;
 
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.message.BasicNameValuePair;
@@ -30,30 +31,26 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import alinaignea.licenta.AppConfig;
+import alinaignea.licenta.helper.AppConfig;
 import alinaignea.licenta.MainActivity;
 import alinaignea.licenta.R;
 import alinaignea.licenta.helper.SQLiteHandler;
 import alinaignea.licenta.helper.SessionManager;
 
 /**
- * Created by Alina Ignea on 5/19/2016.
+ * Created by Alina Ignea on 6/27/2016.
  */
-public class ViewProfile extends Activity {
+public class ViewOtherProfileActivity extends Activity{
+
     protected Bitmap bitmap;
     private Button btnEdit;
     private TextView txtName;
@@ -62,21 +59,22 @@ public class ViewProfile extends Activity {
     private TextView txtCity;
     private TextView txtAbout;
     private ProgressDialog pDialog;
-    private RatingBar ratingVal;
+    protected RatingBar ratingVal;
     private ImageView picture;
-
+    private String driverId;
     String myJSON;
     private SessionManager session;
     private SQLiteHandler db;
-
+    int flag = 0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_profile);
+        Bundle b = getIntent().getExtras();
+        driverId = b.getString("driverId");
 
-
-        btnEdit = (Button) findViewById(R.id.btnEdit);
+        // btnEdit = (Button) findViewById(R.id.btnEdit);
         txtName = (TextView) findViewById(R.id.txtname);
         txtEmail = (TextView) findViewById(R.id.txtemail);
         txtPhone = (TextView) findViewById(R.id.txtphone);
@@ -86,36 +84,12 @@ public class ViewProfile extends Activity {
         picture = (ImageView) findViewById(R.id.pic);
 
 
-        btnEdit.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),
-                        EditProfile.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        // SQLite database handler
-        db = new SQLiteHandler(getApplicationContext());
-
-        // Session manager
-        session = new SessionManager(getApplicationContext());
-
-
-        HashMap<String, String> user = db.getUserDetails();
-
-        String name = user.get("name");
-        String email = user.get("email");
-
-        // Displaying the user details on the screen
-        txtName.setText(name);
-        txtEmail.setText(email);
-
-        if (!email.isEmpty())
-            getUserData(email);
+        if (!driverId.isEmpty())
+            getUserData(driverId);
 
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -129,9 +103,10 @@ public class ViewProfile extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.view:
-                startActivity(new Intent(this, ViewProfile.class));
+                startActivity(new Intent(this, ViewProfileActivity.class));
                 return true;
             case R.id.edit:
+                startActivity(new Intent(this, EditProfileActivity.class));
                 return true;
             case R.id.main:
                 startActivity(new Intent(this, MainActivity.class));
@@ -142,8 +117,7 @@ public class ViewProfile extends Activity {
     }
 
 
-
-    private void getUserData(final String email) {
+    private void getUserData(final String driverId) {
 
         class GetDataJSON extends AsyncTask<String, Void, String>{
 
@@ -153,14 +127,14 @@ public class ViewProfile extends Activity {
 
 
                 HttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost(AppConfig.URL_PROFILE);
+                HttpPost httppost = new HttpPost(AppConfig.URL_OPROFILE);
 
                 // Depends on your web service
                 httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
                 try {
                     ArrayList<NameValuePair> nameValuePairs;
                     nameValuePairs = new ArrayList<NameValuePair>();
-                    nameValuePairs.add(new BasicNameValuePair("email", email));
+                    nameValuePairs.add(new BasicNameValuePair("uid", driverId));
                     httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
                 } catch (UnsupportedEncodingException e)
@@ -222,8 +196,41 @@ public class ViewProfile extends Activity {
                         txtPhone.setText(phone);
                         txtCity.setText (city);
                         txtAbout.setText(about);
+
                         ratingVal.setStepSize((float)0.1);
                         ratingVal.setRating(rating_v);
+
+                        ratingVal.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                            public void onRatingChanged(RatingBar ratingBar, float rating,
+                                                        boolean fromUser) {
+                                if (flag==0) {
+                                    final String rate = String.valueOf(rating);
+                                    new AlertDialog.Builder(ViewOtherProfileActivity.this)
+                                            .setTitle("Rating")
+                                            .setMessage("Are you sure you want to rate this user with " + String.valueOf(rating) + " stars?")
+                                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int which) {
+
+                                                    rate(driverId, rate);
+
+                                                }
+                                            })
+                                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    // nimic
+                                                }
+                                            })
+                                            .setIcon(android.R.drawable.ic_dialog_alert)
+                                            .show();
+                                    // Toast.makeText(getApplicationContext(), tripsList.get(arg2).get(TAG_UID) , Toast.LENGTH_LONG).show();
+                                flag=1;
+                                    ratingVal.setClickable(false);
+                                    ratingVal.setIsIndicator(true);
+                                }
+                            }
+
+                        });
+
 
                         new LoadImage().execute(avatar);
 
@@ -238,7 +245,7 @@ public class ViewProfile extends Activity {
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                //    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -246,11 +253,13 @@ public class ViewProfile extends Activity {
         GetDataJSON g = new GetDataJSON();
         g.execute();
     }
+
+
     private class LoadImage extends AsyncTask<String, String, Bitmap> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(ViewProfile.this);
+            pDialog = new ProgressDialog(ViewOtherProfileActivity.this);
             pDialog.setMessage("Loading Image ....");
             pDialog.show();
 
@@ -274,11 +283,105 @@ public class ViewProfile extends Activity {
             }else{
 
                 pDialog.dismiss();
-                Toast.makeText(ViewProfile.this, "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewOtherProfileActivity.this, "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
 
             }
         }
     }
+
+    private void rate(final String driverId, final String rate){
+        class GetDataJSON extends AsyncTask<String, Void, String> {
+
+            @Override
+            protected String doInBackground(String... params) {
+
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpPost httppost = new HttpPost(AppConfig.URL_RATE);
+
+                // Depends on your web service
+                httppost.setHeader("Content-type", "application/x-www-form-urlencoded");
+                try {
+                    ArrayList<NameValuePair> nameValuePairs;
+                    nameValuePairs = new ArrayList<NameValuePair>();
+                    nameValuePairs.add(new BasicNameValuePair("uid", driverId));
+                    nameValuePairs.add(new BasicNameValuePair("rate", rate));
+
+
+                    httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                } catch (UnsupportedEncodingException e)
+                {
+                    e.printStackTrace();
+                }
+                InputStream inputStream = null;
+                String result = null;
+                try {
+                    HttpResponse response = httpclient.execute(httppost);
+                    HttpEntity entity = response.getEntity();
+
+                    inputStream = entity.getContent();
+                    // json is UTF-8 by default
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
+                    StringBuilder sb = new StringBuilder();
+
+                    String line = null;
+                    while ((line = reader.readLine()) != null)
+                    {
+                        sb.append(line + "\n");
+                    }
+                    result = sb.toString();
+                    Log.d("php", result);
+                } catch (Exception e) {
+                    // Oops
+                }
+                finally {
+                    try{if(inputStream != null)inputStream.close();}catch(Exception squish){}
+                }
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(String result){
+
+                try {
+                    JSONObject jObj = new JSONObject(result);
+                    boolean error = jObj.getBoolean("error");
+                    String errorMsg = jObj.getString("message");
+                    Toast.makeText(getApplicationContext(),
+                            errorMsg, Toast.LENGTH_LONG).show();
+
+                    // Check for error node in json
+                    if (!error) {
+                        // user profile successfully updated
+                        // Now show profile
+                        getUserData(driverId);
+
+
+                    }
+
+                    else {
+                        // Error in updating. Get the error message
+                        getUserData(driverId);
+
+                    }
+                    Toast.makeText(getApplicationContext(),
+                            errorMsg, Toast.LENGTH_LONG).show();
+
+                } catch (JSONException e) {
+                    // JSON error
+                    getUserData(driverId);
+                    e.printStackTrace();
+                  //  Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }
+        GetDataJSON g = new GetDataJSON();
+        g.execute();
+    }
+
+
+
+
+
 }
-
-

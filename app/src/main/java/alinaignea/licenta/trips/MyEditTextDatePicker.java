@@ -1,4 +1,4 @@
-package alinaignea.licenta;
+package alinaignea.licenta.trips;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -37,24 +37,13 @@ public class MyEditTextDatePicker  implements View.OnClickListener, DatePickerDi
         _year = year;
         _month = monthOfYear;
         _day = dayOfMonth;
-      //  if(_year>=mYear && _month>=mMonth&&_day>=mDay)
             updateDisplay();
-      /*  else{
-            Toast.makeText(_context,
-                    "Please select a future date!", Toast.LENGTH_LONG).show();
-            DatePickerDialog dialog = new DatePickerDialog(_context, this, mYear, mMonth, mDay);
-            dialog.show();
-        }*/
-
     }
     @Override
     public void onClick(View v) {
-
-
         DatePickerDialog dialog = new DatePickerDialog(_context, this, mYear, mMonth, mDay);
         dialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         dialog.show();
-
     }
 
     // updates the date in the birth date EditText

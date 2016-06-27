@@ -33,10 +33,12 @@
         android:background="@color/btn_logut_bg"
         android:layout_gravity="left|top"
         android:text="@string/btn_join"
+        android:hint="test"
         android:textAllCaps="false"
+        android:focusable="false"
         android:textColor="@color/white"
         android:layout_margin="0dp"
-        android:textSize="24dp"
+        android:textSize="24sp"
         />
 
 

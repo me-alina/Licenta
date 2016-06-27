@@ -1,11 +1,9 @@
-package alinaignea.licenta.menu_classes;
+package alinaignea.licenta.menu_profile;
 
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -15,14 +13,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.os.AsyncTask;
 
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.message.BasicNameValuePair;
@@ -32,21 +26,15 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import alinaignea.licenta.AppConfig;
+import alinaignea.licenta.helper.AppConfig;
 import alinaignea.licenta.MainActivity;
 import alinaignea.licenta.R;
 import alinaignea.licenta.helper.SQLiteHandler;
@@ -55,7 +43,7 @@ import alinaignea.licenta.helper.SessionManager;
 /**
  * Created by Alina Ignea on 5/19/2016.
  */
-public class EditProfile extends Activity {
+public class EditProfileActivity extends Activity {
     protected Bitmap bitmap;
     private Button btnSave;
     private Button btnCancel;
@@ -89,7 +77,7 @@ public class EditProfile extends Activity {
 
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),
-                        ViewProfile.class);
+                        ViewProfileActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -159,7 +147,7 @@ public class EditProfile extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.view:
-                startActivity(new Intent(this, ViewProfile.class));
+                startActivity(new Intent(this, ViewProfileActivity.class));
                 return true;
             case R.id.edit:
                 return true;
@@ -339,7 +327,7 @@ public class EditProfile extends Activity {
                     if (!error) {
                         // user profile successfully updated
                         // Now show profile
-                        Intent intent = new Intent(getApplicationContext(), ViewProfile.class);
+                        Intent intent = new Intent(getApplicationContext(), ViewProfileActivity.class);
                         startActivity(intent);
                         finish();
 
