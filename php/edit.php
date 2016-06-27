@@ -12,11 +12,8 @@ if( isset($_POST['uid'] ) && isset($_POST['name'])&& isset($_POST['email']) && i
 	$email=$_POST['email'];
 	$phone=$_POST['phone'];
 	$about=$_POST['about'];
-
    // $result = mysql_query("update users set name='$name', email='$email', phone='$phone', about='$about' where unique_id='$uid' ") or die(mysql_error());
-
     $response = $db->updateUser ($uid, $name, $email, $phone, $about);
-
 }
 else {
 	$response["error"] = TRUE;

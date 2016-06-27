@@ -5,14 +5,14 @@ $db = new DB_Functions();
 // json response array
 $response = array("error" => FALSE);
  //var_dump($_POST);
- if (isset($_POST['email'])) {
+ if (isset($_POST['uid'])) {
  
     // receiving the post params
-    $email = $_POST['email'];
-	$gravatar = $db->get_gravatar($email);
+    $uid = $_POST['uid'];
+	//$gravatar = $db->get_gravatar($email);
  
     // get the user by email and password
-    $user = $db->getUserData($email);
+    $user = $db->getUserProfileById($uid);
  
     if ($user != false) {
         // use is found
@@ -27,7 +27,7 @@ $response = array("error" => FALSE);
 		$response["user"]["about"] = $user["about"];
 		$response["user"]["rating_cnt"] = $user["rating_cnt"];
 		$response["user"]["rating_val"] = $user["rating_val"];
-		$response["user"]["avatar"]=$gravatar;
+		$response["user"]["avatar"]=$user["gravatar"];
         echo json_encode($response);
     } else {
         // user is not found with the credentials
